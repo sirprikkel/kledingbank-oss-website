@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regels — Kledingbank Oss</title>
+    <meta name="description" content="Regels voor uitgifte en het inleveren van kleding bij Kledingbank Oss.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1C1917',
+                        secondary: '#44403C',
+                        cta: '#CA8A04',
+                        bg: '#FAFAF9',
+                        txt: '#0C0A09',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://analytics.code-lieshout.nl/prikkel" data-website-id="PLACEHOLDER"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: #0C0A09; background: #FAFAF9; }
+        .glass-dark {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(28, 25, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #CA8A04, #EAB308, #CA8A04);
+            background-size: 200% 200%;
+            animation: goldShimmer 3s ease-in-out infinite;
+            color: white;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(202,138,4,0.4);
+        }
+        @keyframes goldShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-dark">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <a href="index.html" class="flex items-center gap-3 cursor-pointer">
+                    <img src="images/logo.png" alt="Kledingbank Oss logo" class="h-10 md:h-12 w-auto">
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Home</a>
+                    <a href="hoe-het-werkt.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Hoe het werkt</a>
+                    <a href="kom-binnen.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Kom binnen</a>
+                    <a href="regels.html" class="text-white/90 hover:text-cta transition-colors duration-200 font-medium cursor-pointer">Regels</a>
+                    <a href="contact.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Contact</a>
+                    <a href="contact.html" class="btn-gold px-5 py-2.5 text-sm cursor-pointer inline-block">Doneer</a>
+                </div>
+                <button id="menuBtn" class="md:hidden text-white cursor-pointer p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Menu openen">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden glass-dark border-t border-white/10">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Home</a>
+                <a href="hoe-het-werkt.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Hoe het werkt</a>
+                <a href="kom-binnen.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Kom binnen</a>
+                <a href="regels.html" class="block text-white/90 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Regels</a>
+                <a href="contact.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Contact</a>
+                <a href="contact.html" class="btn-gold px-5 py-2.5 text-sm cursor-pointer inline-block mt-2">Doneer</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-primary pt-32 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-cta rounded-full blur-3xl"></div>
+        </div>
+        <div class="relative max-w-4xl mx-auto px-4 md:px-6 lg:px-8 text-center">
+            <p class="text-cta font-medium tracking-widest uppercase text-sm mb-4 fade-up">Richtlijnen</p>
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6 fade-up">Regels</h1>
+            <p class="text-white/60 text-lg max-w-2xl mx-auto fade-up">
+                Regels voor uitgifte en het inleveren van kleding bij de Kledingbank Oss.
+            </p>
+        </div>
+    </section>
+
+    <!-- Regels voor uitgifte -->
+    <section class="py-20 md:py-28 bg-bg">
+        <div class="max-w-4xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-primary mb-10 fade-up">Regels voor uitgifte</h2>
+                
+                <div class="space-y-4">
+                    <div class="glass-card bg-white/60 p-6 md:p-8 flex gap-4 fade-up">
+                        <div class="w-10 h-10 rounded-full bg-cta/10 flex items-center justify-center shrink-0">
+                            <span class="text-cta font-serif font-bold">1</span>
+                        </div>
+                        <p class="text-secondary leading-relaxed">Een nieuwe verwijsbrief dient u tijdig op te halen bij een van de instanties genoemd op de pagina <a href="hoe-het-werkt.html" class="text-cta hover:underline cursor-pointer">"Hoe het werkt"</a>.</p>
+                    </div>
+
+                    <div class="glass-card bg-white/60 p-6 md:p-8 flex gap-4 fade-up">
+                        <div class="w-10 h-10 rounded-full bg-cta/10 flex items-center justify-center shrink-0">
+                            <span class="text-cta font-serif font-bold">2</span>
+                        </div>
+                        <p class="text-secondary leading-relaxed">Graag Nederlands spreken.</p>
+                    </div>
+
+                    <div class="glass-card bg-white/60 p-6 md:p-8 flex gap-4 fade-up">
+                        <div class="w-10 h-10 rounded-full bg-cta/10 flex items-center justify-center shrink-0">
+                            <span class="text-cta font-serif font-bold">3</span>
+                        </div>
+                        <p class="text-secondary leading-relaxed">De winkel keurig achterlaten, dit houdt in dat u alle kleding die u niet kiest weer teruglegt of hangt in de daarvoor bestemde bak of rek en op de juiste maat.</p>
+                    </div>
+
+                    <div class="glass-card bg-white/60 p-6 md:p-8 flex gap-4 fade-up">
+                        <div class="w-10 h-10 rounded-full bg-cta/10 flex items-center justify-center shrink-0">
+                            <span class="text-cta font-serif font-bold">4</span>
+                        </div>
+                        <p class="text-secondary leading-relaxed">U legt de kleding duidelijk op de tafel en vertelt ons voor wie het kledingstuk is, dit om verwarring te voorkomen.</p>
+                    </div>
+
+                    <div class="glass-card bg-white/60 p-6 md:p-8 flex gap-4 fade-up">
+                        <div class="w-10 h-10 rounded-full bg-cta/10 flex items-center justify-center shrink-0">
+                            <span class="text-cta font-serif font-bold">5</span>
+                        </div>
+                        <p class="text-secondary leading-relaxed">Vrijwilligers die hier werken moeten netjes en correct behandeld worden.</p>
+                    </div>
+
+                    <div class="glass-card bg-white/60 p-6 md:p-8 flex gap-4 fade-up">
+                        <div class="w-10 h-10 rounded-full bg-cta/10 flex items-center justify-center shrink-0">
+                            <span class="text-cta font-serif font-bold">6</span>
+                        </div>
+                        <p class="text-secondary leading-relaxed">Bij constatering van diefstal of vernieling nemen we contact op met de Politie en u wordt geweigerd bij de Kledingbank.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kleding inbrengen -->
+            <div>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-primary mb-10 fade-up">Kleding inbrengen</h2>
+                
+                <div class="glass-card bg-white/60 p-8 md:p-10 fade-up">
+                    <p class="text-secondary leading-relaxed mb-6">
+                        Graag schone, draagbare nette kleding en schoenen inleveren. Ook dekbedovertrekken, matrashoezen en handdoeken zijn welkom (als ze schoon, niet kapot of versleten zijn), echter dekbedden en kussen kunnen we wegens hygiënische redenen niet aannemen.
+                    </p>
+                    
+                    <div class="bg-cta/5 border border-cta/20 rounded-xl p-6 mb-6">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-cta shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/></svg>
+                            <p class="text-secondary leading-relaxed">
+                                <strong class="text-primary">Let op:</strong> De laatste tijd krijgen we veel aanvoer van kapotte, vieze en stinkende kleding. Dit moeten onze vrijwilligers sorteren en afvoeren als grof vuil. Dus graag schoon, heel en draagbaar.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-50 border border-red-200 rounded-xl p-6">
+                        <div class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-red-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+                            <p class="text-secondary leading-relaxed">
+                                <strong class="text-primary">Er kan bij ons geen Shein en Temu kleding worden ingeleverd.</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buiten openingstijden -->
+            <div class="mt-12 glass-card bg-white/60 p-8 md:p-10 fade-up">
+                <h3 class="font-serif text-xl font-bold text-primary mb-4">Buiten openingstijden</h3>
+                <p class="text-secondary leading-relaxed">
+                    Buiten de openingstijden en op andere dagen kunt u kleding, schoenen, matrashoezen en dekbedovertrekken in de blauwe container bij de voordeur deponeren, mits het hek open staat. Is het hek gesloten, dan geen kleding over het hek gooien — dit kunnen wij niet meer gebruiken en moeten we afvoeren, wat ons geld kost.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 bg-primary relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-cta/10 rounded-full blur-3xl"></div>
+        </div>
+        <div class="relative max-w-3xl mx-auto px-4 md:px-6 lg:px-8 text-center fade-up">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Vragen over de regels?</h2>
+            <p class="text-white/60 mb-8">Neem gerust contact met ons op.</p>
+            <a href="contact.html" class="btn-gold px-10 py-4 text-lg cursor-pointer inline-block min-h-[44px]">
+                Neem contact op
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary border-t border-white/5 py-16">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-10">
+                <div class="md:col-span-2">
+                    <img src="images/logo.png" alt="Kledingbank Oss" class="h-12 mb-4">
+                    <p class="text-white/50 leading-relaxed max-w-md">Stichting Kledingbank Oss voorziet sinds 2008 mensen met een laag inkomen gratis van kleding, schoenen en beddengoed.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Pagina's</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Home</a></li>
+                        <li><a href="hoe-het-werkt.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Hoe het werkt</a></li>
+                        <li><a href="kom-binnen.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Kom binnen</a></li>
+                        <li><a href="regels.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Regels</a></li>
+                        <li><a href="contact.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-white/50">
+                        <li>Linkensweg 1A, 5341 CA Oss</li>
+                        <li><a href="tel:0642861225" class="hover:text-cta transition-colors duration-200 cursor-pointer">06-42 86 12 25</a></li>
+                        <li><a href="mailto:info@kledingbankoss.nl" class="hover:text-cta transition-colors duration-200 cursor-pointer">info@kledingbankoss.nl</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/30 text-sm">© 2026 Stichting Kledingbank Oss</p>
+                <p class="text-white/30 text-sm">Gebouwd door <a href="https://www.code-lieshout.nl" class="hover:text-cta transition-colors duration-200 cursor-pointer">Code Lieshout</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

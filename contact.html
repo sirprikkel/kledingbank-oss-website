@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Kledingbank Oss</title>
+    <meta name="description" content="Neem contact op met Kledingbank Oss. Adres, openingstijden, contactformulier en routebeschrijving.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1C1917',
+                        secondary: '#44403C',
+                        cta: '#CA8A04',
+                        'cta-hover': '#A16207',
+                        bg: '#FAFAF9',
+                        txt: '#0C0A09',
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script defer src="https://analytics.code-lieshout.nl/prikkel" data-website-id="PLACEHOLDER"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; color: #0C0A09; background: #FAFAF9; }
+        .glass-dark {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(28, 25, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, #CA8A04, #EAB308, #CA8A04);
+            background-size: 200% 200%;
+            animation: goldShimmer 3s ease-in-out infinite;
+            color: white;
+            font-weight: 600;
+            border-radius: 12px;
+            transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(202,138,4,0.4);
+        }
+        @keyframes goldShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 600ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        input, textarea, select {
+            transition: border-color 300ms, box-shadow 300ms;
+        }
+        input:focus, textarea:focus, select:focus {
+            border-color: #CA8A04;
+            box-shadow: 0 0 0 3px rgba(202,138,4,0.15);
+            outline: none;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="fixed top-0 w-full z-50 glass-dark">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 md:h-20">
+                <a href="index.html" class="flex items-center gap-3 cursor-pointer">
+                    <img src="images/logo.png" alt="Kledingbank Oss logo" class="h-10 md:h-12 w-auto">
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Home</a>
+                    <a href="hoe-het-werkt.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Hoe het werkt</a>
+                    <a href="kom-binnen.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Kom binnen</a>
+                    <a href="regels.html" class="text-white/70 hover:text-cta transition-colors duration-200 cursor-pointer">Regels</a>
+                    <a href="contact.html" class="text-white/90 hover:text-cta transition-colors duration-200 font-medium cursor-pointer">Contact</a>
+                    <a href="#doneer" class="btn-gold px-5 py-2.5 text-sm cursor-pointer inline-block">Doneer</a>
+                </div>
+                <button id="menuBtn" class="md:hidden text-white cursor-pointer p-2 min-w-[44px] min-h-[44px] flex items-center justify-center" aria-label="Menu openen">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden glass-dark border-t border-white/10">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Home</a>
+                <a href="hoe-het-werkt.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Hoe het werkt</a>
+                <a href="kom-binnen.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Kom binnen</a>
+                <a href="regels.html" class="block text-white/70 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Regels</a>
+                <a href="contact.html" class="block text-white/90 hover:text-cta transition-colors duration-200 py-2 cursor-pointer">Contact</a>
+                <a href="#doneer" class="btn-gold px-5 py-2.5 text-sm cursor-pointer inline-block mt-2">Doneer</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="bg-primary pt-32 pb-20 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute top-0 left-1/2 w-96 h-96 bg-cta rounded-full blur-3xl"></div>
+        </div>
+        <div class="relative max-w-4xl mx-auto px-4 md:px-6 lg:px-8 text-center">
+            <p class="text-cta font-medium tracking-widest uppercase text-sm mb-4 fade-up">Bereik ons</p>
+            <h1 class="font-serif text-4xl md:text-6xl font-bold text-white mb-6 fade-up">Contact</h1>
+            <p class="text-white/60 text-lg max-w-2xl mx-auto fade-up">
+                Wij zijn er om u te helpen met uw kledingbehoeften. Ontdek hoe u ons kunt bereiken en wanneer u ons kunt bezoeken.
+            </p>
+        </div>
+    </section>
+
+    <!-- Contact info + form -->
+    <section class="py-20 md:py-28 bg-bg">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Info kolom -->
+                <div>
+                    <div class="glass-card bg-white/60 p-8 md:p-10 mb-8 fade-up">
+                        <h2 class="font-serif text-2xl font-bold text-primary mb-6">Contactgegevens</h2>
+                        <div class="space-y-5">
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-primary">Adres</p>
+                                    <p class="text-secondary">Linkensweg 1A, 5341 CA Oss</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-primary">Telefoon</p>
+                                    <a href="tel:0642861225" class="text-cta hover:underline cursor-pointer">06-42 86 12 25</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-primary">Email</p>
+                                    <a href="mailto:info@kledingbankoss.nl" class="text-cta hover:underline cursor-pointer">info@kledingbankoss.nl</a>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4">
+                                <div class="w-12 h-12 rounded-xl bg-cta/10 flex items-center justify-center shrink-0">
+                                    <svg class="w-6 h-6 text-cta" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-primary">Google Maps</p>
+                                    <a href="https://maps.google.com/?q=Linkensweg+1A+5341+CA+Oss" target="_blank" rel="noopener" class="text-cta hover:underline cursor-pointer">Routebeschrijving</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Openingstijden -->
+                    <div class="glass-card bg-white/60 p-8 md:p-10 fade-up">
+                        <h2 class="font-serif text-2xl font-bold text-primary mb-6">Openingstijden</h2>
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-primary font-medium">Maandag</span>
+                                <span class="text-secondary">09:30 – 13:00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-primary font-medium">Dinsdag</span>
+                                <span class="text-secondary">09:30 – 13:00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-primary font-medium">Woensdag</span>
+                                <span class="text-secondary">09:30 – 16:00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-primary font-medium">Donderdag</span>
+                                <span class="text-secondary">09:30 – 12:00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-primary font-medium">Vrijdag</span>
+                                <span class="text-red-400">Gesloten</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                <span class="text-primary font-medium">Zaterdag</span>
+                                <span class="text-red-400">Gesloten</span>
+                            </div>
+                            <div class="flex justify-between items-center py-2">
+                                <span class="text-primary font-medium">Zondag</span>
+                                <span class="text-red-400">Gesloten</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Routebeschrijving -->
+                    <div class="glass-card bg-white/60 p-8 md:p-10 mt-8 fade-up">
+                        <h2 class="font-serif text-2xl font-bold text-primary mb-4">Routebeschrijving</h2>
+                        <p class="text-secondary leading-relaxed">
+                            U kunt ons eenvoudig vinden door de Linkensweg te volgen en de inrit direct achter de kerk te nemen. Dit leidt u naar ons parkeerterrein. Voor het afgeven van kleding buiten onze openingstijden, kunt u gebruikmaken van de blauwe container bij de voordeur, mits het hek open is.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Formulier kolom -->
+                <div class="fade-up">
+                    <div class="glass-card bg-white/60 p-8 md:p-10">
+                        <h2 class="font-serif text-2xl font-bold text-primary mb-6">Stuur ons een bericht</h2>
+                        <form action="mailto:info@kledingbankoss.nl" method="POST" enctype="text/plain" class="space-y-5">
+                            <div>
+                                <label for="naam" class="block text-sm font-medium text-primary mb-2">Naam *</label>
+                                <input type="text" id="naam" name="naam" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-primary min-h-[44px]" placeholder="Uw volledige naam">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-primary mb-2">Email *</label>
+                                <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-primary min-h-[44px]" placeholder="uw@email.nl">
+                            </div>
+                            <div>
+                                <label for="telefoon" class="block text-sm font-medium text-primary mb-2">Telefoon</label>
+                                <input type="tel" id="telefoon" name="telefoon" class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-primary min-h-[44px]" placeholder="06-12345678">
+                            </div>
+                            <div>
+                                <label for="onderwerp" class="block text-sm font-medium text-primary mb-2">Onderwerp *</label>
+                                <select id="onderwerp" name="onderwerp" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-primary min-h-[44px] cursor-pointer">
+                                    <option value="">Kies een onderwerp</option>
+                                    <option value="kleding-ophalen">Kleding ophalen</option>
+                                    <option value="kleding-doneren">Kleding doneren</option>
+                                    <option value="vrijwilliger">Vrijwilliger worden</option>
+                                    <option value="sponsoring">Sponsoring / donatie</option>
+                                    <option value="overig">Overig</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="bericht" class="block text-sm font-medium text-primary mb-2">Bericht *</label>
+                                <textarea id="bericht" name="bericht" rows="5" required class="w-full px-4 py-3 rounded-xl border border-gray-200 bg-white/80 text-primary resize-y" placeholder="Uw bericht..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-gold w-full px-8 py-4 text-center cursor-pointer min-h-[44px]">
+                                Verstuur bericht
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Doneer sectie -->
+                    <div id="doneer" class="glass-card bg-white/60 p-8 md:p-10 mt-8 fade-up">
+                        <h2 class="font-serif text-2xl font-bold text-primary mb-4">Doneer</h2>
+                        <p class="text-secondary leading-relaxed mb-4">
+                            De Stichting Kledingbank Oss heeft geen eigen inkomen en is afhankelijk van sponsoren, subsidies en donaties. Elke bijdrage telt!
+                        </p>
+                        <div class="bg-cta/5 border border-cta/20 rounded-xl p-6">
+                            <p class="text-primary font-medium mb-1">Rekeningnummer</p>
+                            <p class="text-cta font-serif text-xl font-bold">NL89 ABNA 0842 1531 52</p>
+                            <p class="text-secondary text-sm mt-1">t.n.v. Stichting Kledingbank Oss</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-primary border-t border-white/5 py-16">
+        <div class="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-10">
+                <div class="md:col-span-2">
+                    <img src="images/logo.png" alt="Kledingbank Oss" class="h-12 mb-4">
+                    <p class="text-white/50 leading-relaxed max-w-md">Stichting Kledingbank Oss voorziet sinds 2008 mensen met een laag inkomen gratis van kleding, schoenen en beddengoed.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Pagina's</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Home</a></li>
+                        <li><a href="hoe-het-werkt.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Hoe het werkt</a></li>
+                        <li><a href="kom-binnen.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Kom binnen</a></li>
+                        <li><a href="regels.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Regels</a></li>
+                        <li><a href="contact.html" class="text-white/50 hover:text-cta transition-colors duration-200 cursor-pointer">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-white/50">
+                        <li>Linkensweg 1A, 5341 CA Oss</li>
+                        <li><a href="tel:0642861225" class="hover:text-cta transition-colors duration-200 cursor-pointer">06-42 86 12 25</a></li>
+                        <li><a href="mailto:info@kledingbankoss.nl" class="hover:text-cta transition-colors duration-200 cursor-pointer">info@kledingbankoss.nl</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-white/30 text-sm">© 2026 Stichting Kledingbank Oss</p>
+                <p class="text-white/30 text-sm">Gebouwd door <a href="https://www.code-lieshout.nl" class="hover:text-cta transition-colors duration-200 cursor-pointer">Code Lieshout</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('menuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
